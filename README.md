@@ -212,7 +212,7 @@ Os desenhos da solução, podem ser entregues via Google Docs, Office 365, Git, 
 ### 6) Dada uma stream, encontre o primeiro caracter Vogal, após uma consoante, onde a mesma é antecessora a uma vogal e que não se repita no resto da stream. O termino da leitura da stream deve ser garantido através do método hasNext(), ou seja, retorna falso para o termino da leitura da stream. Voce tera acesso a leitura da stream através dos métodos de interface fornecidos ao termino do enunciado. (10 pontos)
 *Leia todo o enunciado
 
-####Premissas:
+#### Premissas:
 - Uma chamada para hasNext() ir retornar se a stream ainda contem caracteres para processar.
 - Uma chamada para getNext() ir retornar o proximo caracter a ser processado na stream.
 - Não será possível reiniciar o fluxo da leitura da stream.
@@ -227,8 +227,8 @@ Segue o exemplo da interface em Java:
 
 ```
 public interface Stream{
-public char getNext();
-public boolean hasNext();
+    public char getNext();
+    public boolean hasNext();
 }
 public static char firstChar(Stream input) {
 }
