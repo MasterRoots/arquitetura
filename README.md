@@ -110,7 +110,7 @@ Referência do Pattern
 [Enterprise Integration Patterns](https://www.enterpriseintegrationpatterns.com/patterns/messaging/CompetingConsumers.html)
 
 
-###3) Um pouco além do MicroServiço (5 pontos)
+### 3) Um pouco além do MicroServiço (5 pontos)
 
 Como a ascensão de modularização e segregação de aplicações por contexto, explique com suas palavras:
 - que é Micro Serviço?
@@ -133,14 +133,14 @@ O que é Micro Serviço?
 
 Existem alguns benefícios da utilização desse modelo:
 
-	- Funcionalidades mais consistentes e de dominio exclusivo,
-	- Facilidade na integração,
-	- Deploys mais consisos e independentes
-	- Módulos reaproveitáveis no ambito geral do sistema.
-	- Testes focados no contexto do negócio,
-	- Divisão especifica de responsabilidades em squads
-	- Diminui pontos únicos de falha no sistema
-	- Facilita a escalabilidade
+- Funcionalidades mais consistentes e de dominio exclusivo,
+- Facilidade na integração,
+- Deploys mais consisos e independentes
+- Módulos reaproveitáveis no ambito geral do sistema.
+- Testes focados no contexto do negócio,
+- Divisão especifica de responsabilidades em squads
+- Diminui pontos únicos de falha no sistema
+- Facilita a escalabilidade
 
 
 
