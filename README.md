@@ -34,21 +34,21 @@ No modelo proposto, estamos utilizando como cloud, a infra da Microsoft Azure. I
 
 - Comunicação facilitada entre aplicações, etc
 
-- O uso da cloud também nos auxilia nas questões de resiliência e tolerância a falhas, disponibilizando nossa infra em regiões diferentes em casos de crise, e claro ser ajustado a uma região mais próxima da nossa localidade diminuindo Latência.
+- O uso da cloud também nos auxilia nas questões de resiliência e tolerância a falhas, disponibilizando nossa infra em regiões diferentes em casos de crise, e claro ser ajustado a uma região mais próxima da nossa localidade diminuindo latência.
 
-Nosso desenho também informa antes da entrada da nossa infra, ainda nos utilizamos de uma CDN( no caso a Akamai) aonde conseguimos entregar caches de nosso APP, melhorando nossa entrega ao consumidor final.
+Nosso desenho também informa antes da entrada da nossa infra, a utilização de uma CDN( no caso a Akamai) aonde conseguimos entregar caches de nosso APP, melhorando nossa entrega ao consumidor final.
 
 
-A segurança nessa camada também é realizada usando de WAF, aonde conseguimos usar a técnica de firewall e também bloquear acessos nocivos a nossa infra, bloqueando Ip's por exemplo que por acaso venham estar honerando nossos recursos com o uso de um Brute Force.
+A segurança nessa camada também é realizada usando-se de um WAF, aonde conseguimos usar a técnica de firewall e também bloquear acessos nocivos a nossa infra, bloqueando Ip's por exemplo que por acaso venham estar onerando nossos recursos com o uso de um Brute Force.
 
-Dentro do nosso ambiente cloud, também podemos trabalhar por aplicação e seu uso de um banco de dados. A latência do uso pode ser minimizado com a escolha da região que o banco estará, se é melhor usar uma maquina virtualizada para hospeda-lo ou se vale a pena utilizar um banco em SAAS aonde passo toda a gestão de tolerãncia, vazão elasticidade para a cloud. Sempre atentando para que isso pode gerar uma depedência com a cloud escolhida. 
+Dentro do nosso ambiente cloud, também podemos trabalhar por aplicação e seu uso de um banco de dados. A latência do uso pode ser minimizado com a escolha da região que o banco estará, se é melhor usar uma maquina virtualizada para hospeda-lo ou se vale a pena utilizar um banco em SAAS aonde passo toda a gestão de tolerãncia, vazão e elasticidade para a cloud. Sempre atentando para que isso pode gerar uma depedência com a cloud escolhida. 
 
 A parte de CI e automação de deploys fica a cargo do famoso Jenkins, aonde podemos criar pipelines para deploys automatizados na estrura de cloud, ainda permitindo a execução de testes de integração, unitários, regressivos e etc.
 
-Outro ponto interessante nessa criação é o modelo de gerenciamento, extração e visualização de logs da aplicação se utilizando das aplicações fluentd, kafka, graylog e elastic, respectivamente gerenciador de logs, mensageria que enviados os dados para serem idexados pelo eslatic e organizados para pesquisas no graylog.
+Outro ponto interessante nessa criação é o modelo de gerenciamento, extração e visualização de logs da aplicação se utilizando das aplicações fluentd, kafka, graylog e elastic, respectivamente gerenciador de logs, mensageria que envia os dados para serem idexados pelo eslatic e organizados para pesquisas no graylog.
 
 
-Finalizando essa primeira estrutura, ainda temos a possibilidade de extrair as informações coletadas em todos nossos banco filtrando com Apache Spark criando um Data Lake. Esse processo tira a necessidade de aplicações tipicas de BI, honerarem a rede em busca de informações, queries lentas blocando bases e recursos e informações mais apuraradas para serem consumidas.
+Finalizando essa primeira estrutura, ainda temos a possibilidade de extrair as informações coletadas em todos nossos bancos filtrando com Apache Spark criando um Data Lake. Esse processo tira a necessidade de aplicações tipicas de BI, onerarem a rede em busca de informações, queries lentas blocando bases e recursos e informações mais apuraradas para serem consumidas.
 
 
 ## Arquitetura de Aplicação
@@ -59,19 +59,19 @@ Foi elaborado, baseado em meu conhecimento adquirido na netshoes, um modelo simp
 
 A stack é basicamente criada a partir do padrão de microserviços. Como linguagem de programação temos aplicações em Java, utilizando spring-boot como framework e node.js com Vue.js aonde criamos o front da loja.
 
-Na parte de segurança e comunicação, as aplicações de autenticação via oAuth2, e compartilhando um token para validar suas transações.
+Na parte de segurança e comunicação, as aplicações usam de autenticação via oAuth2, compartilhando um token para validar suas transações.
 
 O negócio de um e-commerce é bem dinâmico, e cada etapa do funel de compra é atendido por um serviço diferente.
 
 Como loja, temos que permitir flexibilidade tanto para o time de marketing, quanto para a criação de outras lojas se utilizando da mesma infraestrutura.
 
-Isso é alcançado, aonde podemos utilizar o conceito de templastes por loja. Isso define a caracteristica de cada loja, como identidade visual, troca de banners e etc.
+Isso é alcançado, podemos utilizar o conceito de templates por loja. Isso define a característica de cada loja, como identidade visual, troca de banners e etc.
 
 A pesquisa é um ponto critico nesse processo, caso demore muito podemos perder nosso cliente. Por isso, não podemos simplesmente fazer consultas direto em um banco comum. Mesmo com o uso correto de indices, utilização de estratégias de shards e etc, o melhor que podemos fazer para otimizar a pesquisa é criar arquivos indexavéis que facilitam a pesquisa, por isso nesse ponto nos utilizamos de elastic search.
 
 Outro processo que é bem concorrido nesse aspecto, é a aplicação de preços. Esse cálculo pode variar, mas os processo das lojas mudam em uma velocidade maior. Por isso nesse ponto utilizamos a tecnologia de chave e valor do Redis, como estrutura de cache.
 
-Para todo esse processo, acabamos fazendo muitas integrações, tanto interno como externamente. Por isso não podemos deixar nosso site vulnerável a quedas e lentidão. Nesse fluxo, cálculamos frete, consultamos produtos, aplicamos promoções e muito mais, podemos inclusive falar com empresas terceiras para fazer uma pagamento, uma análise de risco e etc. A estratégia de fallbacks e requisões assíncronas são fundamentais.
+Para todo esse processo, acabamos fazendo muitas integrações, tanto interno como externamente. Por isso não podemos deixar nosso site vulnerável a quedas e lentidão. Nesse fluxo, cálculamos frete, consultamos produtos, aplicamos promoções e muito mais, podemos inclusive falar com empresas terceiras para fazer um pagamento, uma análise de risco e etc. A estratégia de fallbacks e requisões assíncronas são fundamentais.
 
 Sempre temos que ter alternativas para o desastre e ter rotas de fuga para opções default da loja e concluírmos a compra.
 
@@ -148,10 +148,10 @@ Existem alguns benefícios da utilização desse modelo:
 
 Além dos pontos positivos declarados acima, devemos ter em mente que a utilização de microserviços trazem grandes beneficios para o sistema, mas ao mesmo tempo gera muito mais complexibilidade.
 
-Os contras, ou talvez, pontos de atenção para a urilização de microserviços podem ser resumidos em:
+Os contras, ou talvez, pontos de atenção para a utilização de microserviços podem ser resumidos em:
 
 - Monitoria mais complexa, aonde temos que verificar a performance e a saúde de várias aplicações
-- Utilização de infraestrutura mais para agregra logs de várias aplicações
+- Utilização de infraestrutura maior para agregar logs de várias aplicações
 - Testes de integração mais complexos e processos de deploys que podem ficar mais inflados e demorarem mais para serem concluídos, ou seja, demanda mais atenção no que e no que não testar
 - Mais atenção as estratégias de deploys, como canário, green/blue etc.
 
@@ -161,9 +161,9 @@ Os contras, ou talvez, pontos de atenção para a urilização de microserviços
 
 Como serviço independente em termos de contexto, a aplicação poderia ser escalada na horizontal. Como os dados referentes ao cep, não tem atualização constante, colocaria os dados em cache utilizando redis.
 
-Os dados em geral estaria em um MongoDB, e esses dados do Redis, seriam "esquentados" por um scheduler, aonde seriam atualizados via aplicação de webservices dos correios, 2 vezes por semana.
+Os dados em geral estariam em um MongoDB, e esses dados do Redis, seriam "esquentados" por um scheduler, aonde seriam atualizados via aplicação de webservices dos correios, 2 vezes por semana.
 
-Para termos um SEP, caracteristica de um api gateway, deveria ser desenolvido uma camada de aplicação que recebe essas requisões e fazem os roteamentos para as instâncias dos serviço de CEP.
+Para termos um SEP, caracteristica de um api gateway, deveria ser desenvolvido uma camada de aplicação que recebe essas requisões e fazem os roteamentos para as instâncias dos serviço de CEP.
 
 Na frente disso tudo, temos que ter um Load Balancer, com inteligência de saber como distribuir o tráfego.
 
@@ -259,18 +259,18 @@ O que espera-se como resposta - Dicas e direcionamentos:
 
 1. O cliente envia um pacote com a requisição, provavelmente um GET, solicitando um recurso do tipo HTML
 
-2. Essa informação solicitada a esse DNS é inteceptada por um servidor intermediário que checa se existe uma versão cacheada da informação requistada
+2. Essa informação solicitada a esse DNS é interceptada por um servidor intermediário que checa se existe uma versão cacheada da informação requistada
 
 3. Caso positivo, ele retorna o conteúdo estático da página solicitada
 
 4. Caso contrário essa informação é direcionada para o endereço fisico do server da netshoes
 
-5. Essa informação dentro dos servidores da netshoes irão ser redirecionada a uma aplicação associada a uma porta que será que a resposavel por tratar essa requisição
+5. Essa informação dentro dos servidores da netshoes será redirecionada a uma aplicação associada a uma porta que será  a resposável por tratar essa requisição
 
 6. Internamente ela identifica, dentro de sua aplicação BF(Back do Front) que precisa de algumas informações adicionais e faz a requisição para um micro serviço interno.
 
 7. Esse serviço processa a requisição desejada, provavelmente procurando em um banco e retorna para a aplicação BF
 
-8. A Aplicação BF recebe a informação, escolhe qual a melhor forma de entregar a requisição, monta o recurso HTML e devolve ao cliente
+8. A Aplicação BF recebe a informação, escolhe qual a melhor forma de entregar a requisição, monta o recurso HTML e devolve ao usuário
 
 9. A resposta chega ao client, que renderiza o HTML e mostra ao cliente.
