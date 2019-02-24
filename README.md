@@ -191,3 +191,19 @@ Latência de rede é o tempo de retorno de uma requisição em uma rede, quando 
  	- Descobrir o que faz sentindo para seu app: Usar um virtualização do seu banco ou usa-lo como SAAS?
 
  	- Criar um data lake de informações já processadas, para que sua aplicação que precisa de relatórios precisar consultar informações já consolidadas.
+
+
+### 5) Concorrência (10 pontos)
+Durante uma reunião de negócio, um dos diretores de Back office levanta um problema sério de sincronismo de estoque, onde, a loja está vendendo produtos com estoque zerado. De forma complementar, ele explica que, existe 3 canais de vendas de produtos, a loja principal, o call center e as lojas parceiras. Com isto, temos 3 canais que manipulam estoque, porém o back office é responsável por avisa-los da alteração do estoque. Com isto, como cada canal cuida do seu estoque, a probabilidade de vender produtos sem estoque é alta.
+Sendo assim, a equipe de arquitetura de solução foi acionada e, você, como arquiteto responsável por esta frente, precisa:
+-Desenhar uma solução que resolva o problema de venda de estoque zerado;
+- A solução deve se atentar a situações de estorno/devolução de compra;
+- Deve ser performática e escalável, pensando em situações de sazonalidade;
+
+#### Entrega
+Os desenhos da solução, podem ser entregues via Google Docs, Office 365, Git, ArchimateTool, Gliffy etc. So não esqueçam de autorizar o acesso.
+
+
+### Solução
+
+![](/img/ARQ5.png)
