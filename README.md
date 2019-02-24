@@ -166,3 +166,28 @@ Os dados em geral estaria em um MongoDB, e esses dados do Redis, seriam "esquent
 Para termos um SEP, caracteristica de um api gateway, deveria ser desenolvido uma camada de aplicação que recebe essas requisões e fazem os roteamentos para as instâncias dos serviço de CEP.
 
 Na frente disso tudo, temos que ter um Load Balancer, com inteligência de saber como distribuir o tráfego.
+
+
+### 4) Latência de Rede (10 pontos)
+Você, como um arquiteto de Soluções é chamado pelo time de Devops/ Infraestrutura para desenhar uma solução que resolva o problema de latência de rede relacionada a comunicação entre a aplicação e o Banco de dados, pois a aplicação é fortemente dependente de um banco de dados, principalmente nas pesquisas e geração de relatórios.
+Para tanto, algumas perguntas foram feitas na reunião e que você precisa responder:
+
+
+• O que é Latência de REDE?
+
+Latência de rede é o tempo de retorno de uma requisição em uma rede, quando dizemos que a latência é alta, estamos nos referindo a um tempo maior de espera por uma resposta.
+
+
+• Qual estratégia deve ser implementada para diminuir essa latência?
+
+- Existem algumas estratégias que podemos utilizar:
+
+ 	- Para um banco sem si, podemos melhorar a performance e o tempo de resposta de uma query ajustando como fazemos as pesquisas e criando indices que facilitam a procura de informações
+
+ 	- Escolher o tipo de banco para cada tipo de aplicação, existem diversos bancos para diversos propósitos. Rápidos na escrita mas lentos na consulta, e vice-e-versa. O que podemos decidir usando o teorema de CAP( Consistência, Disponibilidade e Particionamento)
+
+ 	- Em ambiente cloud, escolher a região mais próxima a sua localização e também a mesma rede que se encontra seu app.
+
+ 	- Descobrir o que faz sentindo para seu app: Usar um virtualização do seu banco ou usa-lo como SAAS?
+
+ 	- Criar um data lake de informações já processadas, para que sua aplicação que precisa de relatórios precisar consultar informações já consolidadas.
