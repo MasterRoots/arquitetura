@@ -246,3 +246,31 @@ O que espera-se como resultado - Dicas e direcionamentos:
 - Não utilizar o nome da Netshoes nos projetos ou packages da prova.
 
 [Link para minha prova anterior](https://github.com/MasterRoots/first-char1)
+
+
+### 7) Quando você digita a URL de um site (http://www.netshoes.com.br) no browser e pressiona enter, explique da forma que preferir, o que ocorre nesse processo do protocolo HTTP entre o Client e o Server. (5 pontos)
+O que espera-se como resposta - Dicas e direcionamentos:
+- Detalhe sua linha de raciocínio;
+- Elabore um plano de entendimento, por exemplo, lista, de forma a elencar os passos;
+- Não copie conteúdo da internet, responda com suas palavras.
+
+
+### Solução
+
+1. O cliente envia um pacote com a requisição, provavelmente um GET, solicitando um recurso do tipo HTML
+
+2. Essa informação solicitada a esse DNS é inteceptada por um servidor intermediário que checa se existe uma versão cacheada da informação requistada
+
+3. Caso positivo, ele retorna o conteúdo estático da página solicitada
+
+4. Caso contrário essa informação é direcionada para o endereço fisico do server da netshoes
+
+5. Essa informação dentro dos servidores da netshoes irão ser redirecionada a uma aplicação associada a uma porta que será que a resposavel por tratar essa requisição
+
+6. Internamente ela identifica, dentro de sua aplicação BF(Back do Front) que precisa de algumas informações adicionais e faz a requisição para um micro serviço interno.
+
+7. Esse serviço processa a requisição desejada, provavelmente procurando em um banco e retorna para a aplicação BF
+
+8. A Aplicação BF recebe a informação, escolhe qual a melhor forma de entregar a requisição, monta o recurso HTML e devolve ao cliente
+
+9. A resposta chega ao client, que renderiza o HTML e mostra ao cliente.
