@@ -95,9 +95,9 @@ Os desenhos da solução, podem ser entregues via Google Docs, Office 365, Git, 
 ![](/img/ARQ2.png)
 
 
-####Padrão proposto : 
+#### Padrão proposto : 
 
-####Competing Consumers
+#### Competing Consumers
 
 A caracteristica desse padrão é aonde meu app SENDER, coloca mensagens concorrentes em um sistema de mensageria, no caso o Kafka.
 
