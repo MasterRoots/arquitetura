@@ -95,9 +95,9 @@ Os desenhos da solução, podem ser entregues via Google Docs, Office 365, Git, 
 ![](/img/ARQ2.png)
 
 
-Padrão proposto : 
+####Padrão proposto : 
 
-Competing Consumers
+####Competing Consumers
 
 A caracteristica desse padrão é aonde meu app SENDER, coloca mensagens concorrentes em um sistema de mensageria, no caso o Kafka.
 
@@ -108,3 +108,61 @@ Sendo assim, conseguimos aumentar o processamento por horas do sistema consumido
 Referência do Pattern
 
 [Enterprise Integration Patterns](https://www.enterpriseintegrationpatterns.com/patterns/messaging/CompetingConsumers.html)
+
+
+###3) Um pouco além do MicroServiço (5 pontos)
+
+Como a ascensão de modularização e segregação de aplicações por contexto, explique com suas palavras:
+- que é Micro Serviço?
+- Porque devemos utilizar?
+- Quais São os Prós e Contras.
+
+Por fim, imagine que você, como arquiteto direcionou o time a construção de um micro serviço de CEP, por exemplo, e o mesmo é altamente acessado como, você como arquiteto, escalaria este micro service? Como resolveria a questão do "S.E.P" (Single entry point) ?
+
+O que espera-se como resposta - Dicas e direcionamentos:
+- Descreva detalhadamente todas as questões se forma organizada
+
+
+## Solução
+
+O que é Micro Serviço?
+
+É um serviço que atende a um dominio especifico, que tenha baixo acoplamento e alta coesão. Diferentemente do modelo antigo monolitico que agregava todas as funcionalidades de um software em um "bloco único de código"
+
+• Porque devemos utilizar?
+
+Existem alguns benefícios da utilização desse modelo:
+
+	- Funcionalidades mais consistentes e de dominio exclusivo,
+	- Facilidade na integração,
+	- Deploys mais consisos e independentes
+	- Módulos reaproveitáveis no ambito geral do sistema.
+	- Testes focados no contexto do negócio,
+	- Divisão especifica de responsabilidades em squads
+	- Diminui pontos únicos de falha no sistema
+	- Facilita a escalabilidade
+
+
+
+### Quais São os Prós e Contras.
+
+Além dos pontos positivos declarados acima, devemos ter em mente que a utilização de microserviços trazem grandes beneficios para o sistema, mas ao mesmo tempo gera muito mais complexibilidade.
+
+Os contras, ou talvez, pontos de atenção para a urilização de microserviços podem ser resumidos em:
+
+- Monitoria mais complexa, aonde temos que verificar a performance e a saúde de várias aplicações
+- Utilização de infraestrutura mais para agregra logs de várias aplicações
+- Testes de integração mais complexos e processos de deploys que podem ficar mais inflados e demorarem mais para serem concluídos, ou seja, demanda mais atenção no que e no que não testar
+- Mais atenção as estratégias de deploys, como canário, green/blue etc.
+
+
+### Por fim, imagine que você, como arquiteto direcionou o time a construção de um micro serviço de CEP, por exemplo, e o mesmo é altamente acessado como, você como arquiteto, escalaria este micro service? Como resolveria a questão do "S.E.P" (Single entry point) ?
+
+
+Como serviço independente em termos de contexto, a aplicação poderia ser escalada na horizontal. Como os dados referentes ao cep, não tem atualização constante, colocaria os dados em cache utilizando redis.
+
+Os dados em geral estaria em um MongoDB, e esses dados do Redis, seriam "esquentados" por um scheduler, aonde seriam atualizados via aplicação de webservices dos correios, 2 vezes por semana.
+
+Para termos um SEP, caracteristica de um api gateway, deveria ser desenolvido uma camada de aplicação que recebe essas requisões e fazem os roteamentos para as instâncias dos serviço de CEP.
+
+Na frente disso tudo, temos que ter um Load Balancer, com inteligência de saber como distribuir o tráfego.
