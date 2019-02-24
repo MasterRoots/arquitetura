@@ -16,6 +16,8 @@ Entrega
 
 Os desenhos da solução, podem ser entregues via Google Docs, Office 365, Git, ArchimateTool, Gliffy etc. So não esqueçam de autorizar o acesso.
 
+## Solução
+
 Para atender aos requisitos propostos, desenhei uma arquitetura de referência separadas em dois momentos.
 
 Uma arquitetura simplificada de infraestrutura e outra para aplicação.
@@ -32,12 +34,12 @@ No modelo proposto, estamos utilizando como cloud, a infra da Microsoft Azure. I
 
 - Comunicação facilitada entre aplicações, etc
 
-	O uso da cloud também nos auxilia nas questões de resiliência e tolerância a falhas, disponibilizando nossa infra em regiões diferentes em casos de crise, e claro ser ajustado a uma região mais próxima da nossa localidade diminuindo Latência.
+- O uso da cloud também nos auxilia nas questões de resiliência e tolerância a falhas, disponibilizando nossa infra em regiões diferentes em casos de crise, e claro ser ajustado a uma região mais próxima da nossa localidade diminuindo Latência.
 
 Nosso desenho também informa antes da entrada da nossa infra, ainda nos utilizamos de uma CDN( no caso a Akamai) aonde conseguimos entregar caches de nosso APP, melhorando nossa entrega ao consumidor final.
 
 
-A segurança nessa camada também é realizada usando de WAF, aonde conseguimos usar a técnica de firewall e também bloquear acessos nocivos a nossa infra, bloqueado Ip's por exemplo que por acaso venham estar honerando nossos recursos com o uso de um Brute Force.
+A segurança nessa camada também é realizada usando de WAF, aonde conseguimos usar a técnica de firewall e também bloquear acessos nocivos a nossa infra, bloqueando Ip's por exemplo que por acaso venham estar honerando nossos recursos com o uso de um Brute Force.
 
 Dentro do nosso ambiente cloud, também podemos trabalhar por aplicação e seu uso de um banco de dados. A latência do uso pode ser minimizado com a escolha da região que o banco estará, se é melhor usar uma maquina virtualizada para hospeda-lo ou se vale a pena utilizar um banco em SAAS aonde passo toda a gestão de tolerãncia, vazão elasticidade para a cloud. Sempre atentando para que isso pode gerar uma depedência com a cloud escolhida. 
 
@@ -53,11 +55,11 @@ Finalizando essa primeira estrutura, ainda temos a possibilidade de extrair as i
 
 ![](/img/ARQ1-2.png)
 
-oi elaborado, baseado em meu conhecimento adquirido na netshoe, um modelo simplificado das aplicações 	que compoem nosso e-commerce
+Foi elaborado, baseado em meu conhecimento adquirido na netshoes, um modelo simplificado das aplicações 	que compoem nosso e-commerce
 
 A stack é basicamente criada a partir do padrão de microserviços. Como linguagem de programação temos aplicações em Java, utilizando spring-boot como framework e node.js com Vue.js aonde criamos o front da loja.
 
-Na parte de segurança e comunicação, as aplicações de autenticação via oAuth2, ecompartilhando um token para validar suas transações.
+Na parte de segurança e comunicação, as aplicações de autenticação via oAuth2, e compartilhando um token para validar suas transações.
 
 O negócio de um e-commerce é bem dinâmico, e cada etapa do funel de compra é atendido por um serviço diferente.
 
@@ -65,7 +67,7 @@ Como loja, temos que permitir flexibilidade tanto para o time de marketing, quan
 
 Isso é alcançado, aonde podemos utilizar o conceito de templastes por loja. Isso define a caracteristica de cada loja, como identidade visual, troca de banners e etc.
 
-A pesquisa é um ponto critico nesse processo, caso demore muito podemos perder nosso cliente. Por isso, não podemos simples fazer consultas direto em um banco comum. Mesmo com o uso correto de indices, utilização de estratégias de shards e etc, o melhor que podemos fazer para otimizar a pesquisa é criar arquivos indexavéis que facilitam a pesquisa, por isso nesse ponto nos utilizamos de elastic search.
+A pesquisa é um ponto critico nesse processo, caso demore muito podemos perder nosso cliente. Por isso, não podemos simplesmente fazer consultas direto em um banco comum. Mesmo com o uso correto de indices, utilização de estratégias de shards e etc, o melhor que podemos fazer para otimizar a pesquisa é criar arquivos indexavéis que facilitam a pesquisa, por isso nesse ponto nos utilizamos de elastic search.
 
 Outro processo que é bem concorrido nesse aspecto, é a aplicação de preços. Esse cálculo pode variar, mas os processo das lojas mudam em uma velocidade maior. Por isso nesse ponto utilizamos a tecnologia de chave e valor do Redis, como estrutura de cache.
 
@@ -76,3 +78,33 @@ Sempre temos que ter alternativas para o desastre e ter rotas de fuga para opç�
 Para o caso de falha, fallbacks automáticos e manuais, para processos de negócios aonde não existe a necessidade de entregar uma informação para o usuário, processos assíncronos com o uso de mensageria.
 No nosso caso RabbitMQ e Kafka.
 
+
+### 2) Limitação Backoffice (10 pontos)
+
+Mais uma vez, você é chamado para uma reunião de tecnologia para discutir uma grande problema que está impactando a finalização de vários pedidos. Este problema está relacionado ao Back office onde é feito todo o processamento do pedido. Atualmente o pedido é iniciado na loja e finalizado no back office, mas, a versão atual do back office é um produto de empresa XPTO onde existe um limite de processamento de 5000 pedidos hora. Porém a meta de venda da Loja é de 40k e esta integração está aferindo diretamente esta meta pois o back office não processo em tempo hábil a cada integração. Você, como arquiteto deve resolver esse problema.
+
+#### Proposta
+Elabore um arquitetura de integração que resolva este problema. Nesta arquitetura, descreva as tecnologias a serem utilizadas e porque esta mudança resolve os problemas. Por fim, é necessário que seja utilizado um designer Pattern de Integração conhecido. Não esqueça de descreve-lo.
+
+#### Entrega
+Os desenhos da solução, podem ser entregues via Google Docs, Office 365, Git, ArchimateTool, Gliffy etc. So não esqueçam de autorizar o acesso.
+
+## Solução
+
+
+![](/img/ARQ2.png)
+
+
+Padrão proposto : 
+
+Competing Consumers
+
+A caracteristica desse padrão é aonde meu app SENDER, coloca mensagens concorrentes em um sistema de mensageria, no caso o Kafka.
+
+O Kafka por sua vez, cria tópicos que podem ser consumidos por múltiplos CONSUMERS.
+
+Sendo assim, conseguimos aumentar o processamento por horas do sistema consumidor
+
+Referência do Pattern
+
+[Enterprise Integration Patterns](https://www.enterpriseintegrationpatterns.com/patterns/messaging/CompetingConsumers.html)
