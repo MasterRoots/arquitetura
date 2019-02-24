@@ -271,6 +271,6 @@ O que espera-se como resposta - Dicas e direcionamentos:
 
 7. Esse serviço processa a requisição desejada, provavelmente procurando em um banco e retorna para a aplicação BF
 
-8. A Aplicação BF recebe a informação, escolhe qual a melhor forma de entregar a requisição, monta o recurso HTML e devolve ao usuário
+8. A Aplicação BF recebe a informação, escolhe qual a melhor forma de entregar a requisição, monta o recurso HTML e devolve ao cliente
 
-9. A resposta chega ao client, que renderiza o HTML e mostra ao cliente.
+9. A resposta chega ao client, que renderiza o HTML e mostra ao usuário.
